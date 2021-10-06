@@ -70,3 +70,17 @@ https://console.twilio.com/?frameUrl=%2Fconsole%3Fx-target-region%3Dus1&newCusto
 https://www.twilio.com/docs/sms/quickstart/node
 
 npm install twilio
+
+### Login , Logout , Refresh Token
+
+1. server < controllers < authCtrl.ts
+
+create functions which is used for login logout refreshtoken
+
+2. server < config < interface.ts
+
+create interfaces which are related to user info, token and etc
+
+3. server < routes < authRouter.ts
+
+create Router for each process ( passed postman test )
