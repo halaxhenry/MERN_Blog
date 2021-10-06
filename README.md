@@ -40,7 +40,7 @@ const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)\*)|(".+"))@((\[[0-
 return re.test(String(email).toLowerCase());
 }
 
-### send
+### send verification Email
 
 1. server < config < sendMail.ts
 
@@ -60,3 +60,13 @@ https://developers.google.com/oauthplayground/
 1.  click gear button and check on Use your own OAuth credentials then put your project information
 2.  type http://mail.google.com on left side and click authrize APIS
 3.  click Exchange authorization code for tokens and get Refresh Token and Access Token
+
+### send sms + Active Account
+
+1. server < config < sendSMS.ts
+
+https://console.twilio.com/?frameUrl=%2Fconsole%3Fx-target-region%3Dus1&newCustomer=true
+
+https://www.twilio.com/docs/sms/quickstart/node
+
+npm install twilio
