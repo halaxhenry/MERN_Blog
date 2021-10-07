@@ -84,3 +84,23 @@ create interfaces which are related to user info, token and etc
 3. server < routes < authRouter.ts
 
 create Router for each process ( passed postman test )
+
+### Setup Client
+
+npm i react-router-dom axios redux redux-thunk react-redux redux-devtools-extension
+
+1. App.tsx -> rafce
+
+index.css --> client < src < styles
+
+client < src
+
+mkdir components
+mkdir pages
+mkdir redux
+mkdir styles
+mkdir utils
+
+bootstrap sources in client < public < index.html
+
+npm i --save-dev @types/react-router-dom
