@@ -104,3 +104,13 @@ mkdir utils
 bootstrap sources in client < public < index.html
 
 npm i --save-dev @types/react-router-dom
+
+### REDUX HEADER
+
+in client < src < redux
+
+mkdir actions
+mkdir types
+mkdir reducers
+
+++ store.ts

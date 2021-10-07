@@ -11,7 +11,7 @@ export const sendSms = (to: string, body: string, txt: string) => {
   try {
     client.messages
     .create({
-      body: `BlogDev ${txt} - ${body}`,
+      body: `The Blog World ${txt} - ${body}`,
       from,
       to
     })
