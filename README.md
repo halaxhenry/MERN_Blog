@@ -114,3 +114,40 @@ mkdir types
 mkdir reducers
 
 ++ store.ts
+
+### Login Page
+
+1. client < src < component < auth
+
+   LoginPass.tsx
+   LoginSMS.tsx
+
+2. client < src < redux < actions
+
+   authAction.ts --> login
+
+   caution: set const res: any , if you do not , cannot read objects inside of payload ( res.data.access_token, res.data.user )
+
+3. client < src < utils
+
+   \*\* FetchData.ts --> postAPI
+
+   tip: please set token?:any not string or object and it will be reason to occur error on header Autorization
+   :(
+
+   \*\* TypeScript.ts --> IUserLogin, InputChange, FormSubmit, IUser
+
+4. client < src < styles
+
+   auth.css
+   index.css ( import auth.css )
+
+5. client < src < pages --> login.tsx (edited)
+
+6. package.json --> proxy
+
+7. client < src < redux < reducers
+
+   \*\* authReducer.ts
+
+   \*\* index.ts --> add auth inside of combineReducers
