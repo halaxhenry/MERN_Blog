@@ -172,3 +172,19 @@ mkdir reducers
 4. client < src < utils
 
 \*\* TypeScript.ts --> IAlert
+
+### Register
+
+1. client < src < pages
+
+\*\* register.tsx
+
+2. client < src < redux < actions
+
+\*\* authAction.ts --> export const register
+
+3. client < src < utils
+
+\*\* Valid.ts --> referred : server < middleware < valid.ts
+
+\*\* TypeScript.ts --> IUserRegister
