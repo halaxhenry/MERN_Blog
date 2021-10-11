@@ -151,3 +151,24 @@ mkdir reducers
    \*\* authReducer.ts
 
    \*\* index.ts --> add auth inside of combineReducers
+
+### LOADING + ERROR + SUCCESS
+
+1. client < src < component < alert
+
+** Alert.tsx
+** Loading.tsx
+\*\* Toast.tsx
+
+2.  client < src < redux < reducers
+
+\*\* alertReducer.ts
+\*\* index.ts
+
+3. client < src < redux < types
+
+\*\* alertType.tsx
+
+4. client < src < utils
+
+\*\* TypeScript.ts --> IAlert

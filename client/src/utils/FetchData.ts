@@ -6,7 +6,5 @@ export const postAPI = async (url: string, post: object, token?:any) => {
     headers: { Authorization: token }
   })
 
-  console.log(res)
-
   return res;
 }
