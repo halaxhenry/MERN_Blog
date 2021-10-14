@@ -24,11 +24,6 @@ const PageRender = () => {
     }
 
     return generatePage(name)
-    return (
-        <div>
-            
-        </div>
-    )
 }
 
 export default PageRender

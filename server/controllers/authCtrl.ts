@@ -36,13 +36,15 @@ const authCtrl = {
             return res.json({ msg: "Success! Please check phone." })
         }
 
-        } catch (err) {
-        return res.status(500).json({msg: err})
+        } catch (err: any) {
+        return res.status(500).json({msg: err.message})
         }
     },
     activeAccount: async(req: Request, res: Response) => {
         try {
         const { active_token } = req.body
+
+        console.log(active_token)
 
         const decoded = <IDecodedToken>jwt.verify(active_token, `${process.env.ACTIVE_TOKEN_SECRET}`)
 
@@ -50,30 +52,23 @@ const authCtrl = {
 
         if(!newUser) return res.status(400).json({msg: "Invalid authentication."})
         
-        const user = new Users(newUser)
+        console.log(newUser)
+        const user = await Users.findOne({account: newUser.account})
+        if(user) return res.status(400).json({msg: "Account already exists."})
 
-        await user.save()
+        const new_user = new Users(newUser)
+
+        await new_user.save()
 
         res.json({msg: "Account has been activated!"})
 
-        } catch (err) {
-        //   let errMsg;
-
-        //   if(err.code === 11000){
-        //     errMsg = Object.keys(err.keyValue)[0] + " already exists."
-        //   }else {
-        //     let name = Object.keys(err.errors)[0]
-        //     errMsg = err.errors[`${name}`].message
-        //   }
-
-        return res.status(500).json({msg: err})
-        }
+        } catch (err: any) {
+            return res.status(500).json({msg: err.message})
+        } 
     },
     login: async(req: Request, res: Response) => {
         try {
             const { account, password } = req.body
-
-            console.log(req.body)
 
             const user = await Users.findOne({account})
 
@@ -82,8 +77,8 @@ const authCtrl = {
             // if user exists
             loginUser(user, password, res)
 
-        } catch (err) {
-            return res.status(500).json({msg: err})
+        } catch (err: any) {
+            return res.status(500).json({msg: err.message})
         }
     },
     logout: async(req: Request, res: Response) => {
@@ -93,8 +88,8 @@ const authCtrl = {
 
             return res.json({msg: "Logged out!"})
 
-        } catch (err) {
-            return res.status(500).json({msg: err})
+        } catch (err: any) {
+            return res.status(500).json({msg: err.message})
         }
     },
     refreshToken: async(req: Request, res: Response) => {
@@ -111,7 +106,7 @@ const authCtrl = {
             const access_token = generateAccessToken({id: user._id})
 
             res.json({access_token})
-        } catch (err) {
+        } catch (err: any) {
         return res.status(500).json({msg: err})
         }
     },
