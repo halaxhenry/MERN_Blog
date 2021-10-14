@@ -188,3 +188,40 @@ mkdir reducers
 \*\* Valid.ts --> referred : server < middleware < valid.ts
 
 \*\* TypeScript.ts --> IUserRegister
+
+### Active Account
+
+1. client < src < pages < active < [slug].tsx
+
+2. client < src < components < alert
+
+\*\* Alert.tsx --> showSuccessMsg, showErrMsg
+
+### Refresh_Token_Logout
+
+1. client < src < redux < actions
+
+\*\* authAction.ts --> login function --> localStorage.setItem('logged', 'true') --> chrome f12 --> application tab and see localstorage
+\*\* authAction.ts --> refreshToen function
+
+2. client < src < utils
+
+\*\* FetchData.ts --> getAPI
+
+3. client < src < app.tsx
+
+4. client < src < pages
+
+\*\* login.tsx
+
+5. client < src < redux < types
+
+\*\* authType.ts --> token to access_token
+
+6. client < src < components < global
+
+\*\* Menu.tsx
+
+7. client < src < redux < actions
+
+\*\* authAction.ts --> logout function
