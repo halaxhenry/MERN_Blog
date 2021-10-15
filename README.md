@@ -225,3 +225,35 @@ mkdir reducers
 7. client < src < redux < actions
 
 \*\* authAction.ts --> logout function
+
+### GOOGLE LOGIN
+
+https://www.npmjs.com/package/react-google-login-lite
+
+cd client --> npm i react-google-login-lite
+
+1. client < src < components < auth
+
+\*\* SocialLogin.tsx
+
+2. client < src < pages
+
+\*\* login.tsx (import SocialLogin)
+
+3. client < src < redux < actions
+
+\*\* authAction.ts --> create googleLogin function
+
+4. server < controller
+
+\*\* authCtrl.ts --> create google
+\*\* authCtrl.ts --> registerUser
+
+5. server < routes
+
+\*\* authRouter.ts --> create router for
+
+6. server < config
+
+\*\* interface.ts --> IGgPayload
+\*\* interface.ts --> IUserParams
