@@ -2,7 +2,7 @@ import { ALERT, IAlertType } from '../types/alertType'
 import { IAlert } from '../../utils/TypeScript'
 
 
-const alertReducer = (state: IAlert = {}, action: any): IAlert => {
+const alertReducer = (state: IAlert = {}, action: IAlertType): IAlert => {
   switch (action.type){
     case ALERT:
       return action.payload

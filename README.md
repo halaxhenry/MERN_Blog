@@ -257,3 +257,11 @@ cd client --> npm i react-google-login-lite
 
 \*\* interface.ts --> IGgPayload
 \*\* interface.ts --> IUserParams
+
+### Facebook Login
+
+npm i react-facebook-login-lite
+
+https://www.youtube.com/watch?v=CAzU531ar7U&list=PLs4co9a6NhMw7xB4xPSkSQRM8uQVAZak6&index=17 --> how to create facebook web app (3:00)
+
+do not use node-fetch but import fetch from 'cross-fetch' !! it is the reason facebook login crush
