@@ -271,3 +271,7 @@ do not use node-fetch but import fetch from 'cross-fetch' !! it is the reason fa
 https://cloudinary.com/
 
 ### login --> setting (top right side ( gear shape )) --> upload tab --> add upload preset (Upload presets:) --> copy upload preset name and paste it in imageUpload --> fetchAddress (dashboard --> account detail --> more --> API Base URL more --> Image)
+
+### SMS CODE !!!
+
+TWILIO_SERVICE_ID = verify --> service
