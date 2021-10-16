@@ -265,3 +265,9 @@ npm i react-facebook-login-lite
 https://www.youtube.com/watch?v=CAzU531ar7U&list=PLs4co9a6NhMw7xB4xPSkSQRM8uQVAZak6&index=17 --> how to create facebook web app (3:00)
 
 do not use node-fetch but import fetch from 'cross-fetch' !! it is the reason facebook login crush
+
+### UPLOAD_CLOUDINARY
+
+https://cloudinary.com/
+
+### login --> setting (top right side ( gear shape )) --> upload tab --> add upload preset (Upload presets:) --> copy upload preset name and paste it in imageUpload --> fetchAddress (dashboard --> account detail --> more --> API Base URL more --> Image)
