@@ -35,6 +35,13 @@ const Menu = () => {
           </li>
         ))
       }
+
+      {
+        auth.user?.role === 'admin' &&
+        <li className={`nav-item ${isActive("/category")}`}>
+          <Link to="/category" className="nav-link">Category</Link>
+        </li>
+      }
       
       {
         auth.user &&
@@ -45,16 +52,22 @@ const Menu = () => {
 
           <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
             <li>
-              <Link className="dropdown-item" to={`/profile/${auth.user._id}`}>Profile</Link>
+              <Link className="dropdown-item" 
+              to={`/profile/${auth.user._id}`}
+              >
+                Profile
+              </Link>
             </li>
 
             <li><hr className="dropdown-divider" /></li>
+
             <li>
               <Link className="dropdown-item" to="/"
               onClick={() => dispatch(logout())}>
                 Logout
               </Link>
             </li>
+
           </ul>
         </li>
       }

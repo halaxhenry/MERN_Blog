@@ -7,6 +7,7 @@ export type FormSubmit = FormEvent<HTMLFormElement>
 
 export type RootStore = ReturnType<typeof rootReducer>
 
+
 export interface IParams {
   page: string
   slug: string
@@ -36,8 +37,18 @@ export interface IUserProfile extends IUserRegister {
   avatar: string | File
 }
 
+
+
 export interface IAlert {
   loading?: boolean
   success?: string | string[]
   errors?: string | string[]
+}
+
+
+export interface ICategory {
+  _id: string
+  name: string
+  createdAt: string
+  updatedAt: string
 }
