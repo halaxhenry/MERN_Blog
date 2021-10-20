@@ -1,23 +1,32 @@
 import { Dispatch } from 'redux'
-import { AUTH, IAuthType } from '../types/authType'
+
 import { ALERT, IAlertType } from '../types/alertType'
+import { 
+  CREATE_COMMENT,
+  ICreateCommentType,
+  GET_COMMENTS,
+  IGetCommentsType,
+  REPLY_COMMENT,
+  IReplyCommentType,
+  UPDATE_COMMENT,
+  UPDATE_REPLY,
+  IUpdateType
+} from '../types/commentType'
 
-import { IUserLogin, IUserRegister } from '../../utils/TypeScript'
+import { IComment } from '../../utils/TypeScript'
 import { postAPI, getAPI } from '../../utils/FetchData'
-import { validRegister, validPhone } from '../../utils/Valid'
 
 
-export const login = (userLogin: IUserLogin) => 
-async (dispatch: Dispatch<IAuthType | IAlertType>) => {
+export const createComment = (
+  data: IComment, token: string
+) => async(dispatch: Dispatch<IAlertType | ICreateCommentType>) => {
   try {
-    dispatch({ type: ALERT, payload: { loading: true } })
+    const res: any = await postAPI('comment', data, token)
 
-    const res: any = await postAPI('login', userLogin)
-    
-    dispatch({ type: AUTH,payload: res.data })
-
-    dispatch({ type: ALERT, payload: { success: res.data.msg } })
-    localStorage.setItem('logged', 'devat-channel')
+    dispatch({
+      type: CREATE_COMMENT,
+      payload: { ...res.data, user: data.user }
+    })
     
   } catch (err: any) {
     dispatch({ type: ALERT, payload: { errors: err.response.data.msg } })
@@ -25,83 +34,21 @@ async (dispatch: Dispatch<IAuthType | IAlertType>) => {
 }
 
 
-export const register = (userRegister: IUserRegister) => 
-async (dispatch: Dispatch<IAuthType | IAlertType>) => {
-  const check = validRegister(userRegister)
-  
-  if(check.errLength > 0)
-    return dispatch({ type: ALERT, payload: { errors: check.errMsg } })
-
+export const getComments = (
+  id: string, num: number
+) => async(dispatch: Dispatch<IAlertType | IGetCommentsType>) => {
   try {
-    dispatch({ type: ALERT, payload: { loading: true } })
-    
-    const res: any = await postAPI('register', userRegister)
+    let limit = 4;
 
-    dispatch({ type: ALERT, payload: { success: res.data.msg } })
-  } catch (err: any) {
-    dispatch({ type: ALERT, payload: { errors: err.response.data.msg } })
-  }
-}
+    const res: any = await getAPI(`comments/blog/${id}?page=${num}&limit=${limit}`)
 
-
-export const refreshToken = () => 
-async (dispatch: Dispatch<IAuthType | IAlertType>) => {
-  const logged = localStorage.getItem('logged')
-  if(logged !== 'devat-channel') return;
-
-  try {
-    dispatch({ type: ALERT, payload: { loading: true } })
-    
-    const res = await getAPI('refresh_token')
-    
-    dispatch({ type: AUTH,payload: res.data })
-
-    dispatch({ type: ALERT, payload: { } })
-  } catch (err: any) {
-    dispatch({ type: ALERT, payload: { errors: err.response.data.msg } })
-  }
-}
-
-
-export const logout = () => 
-async (dispatch: Dispatch<IAuthType | IAlertType>) => {
-  try {
-    localStorage.removeItem('logged')
-    dispatch({ type: AUTH, payload: { } })
-    await getAPI('logout')
-  } catch (err: any) {
-    dispatch({ type: ALERT, payload: { errors: err.response.data.msg } })
-  }
-}
-
-export const googleLogin = (id_token: string) => 
-async (dispatch: Dispatch<IAuthType | IAlertType>) => {
-  try {
-    dispatch({ type: ALERT, payload: { loading: true } })
-
-    const res: any = await postAPI('google_login', { id_token })
-    
-    dispatch({ type: AUTH,payload: res.data })
-
-    dispatch({ type: ALERT, payload: { success: res.data.msg } })
-    localStorage.setItem('logged', 'devat-channel')
-    
-  } catch (err: any) {
-    dispatch({ type: ALERT, payload: { errors: err.response.data.msg } })
-  }
-}
-
-export const facebookLogin = (accessToken: string, userID: string) => 
-async (dispatch: Dispatch<IAuthType | IAlertType>) => {
-  try {
-    dispatch({ type: ALERT, payload: { loading: true } })
-
-    const res: any = await postAPI('facebook_login', { accessToken, userID })
-    
-    dispatch({ type: AUTH,payload: res.data })
-
-    dispatch({ type: ALERT, payload: { success: res.data.msg } })
-    localStorage.setItem('logged', 'devat-channel')
+    dispatch({
+      type: GET_COMMENTS,
+      payload: {
+        data: res.data.comments,
+        total: res.data.total
+      }
+    })
     
   } catch (err: any) {
     dispatch({ type: ALERT, payload: { errors: err.response.data.msg } })
@@ -109,48 +56,37 @@ async (dispatch: Dispatch<IAuthType | IAlertType>) => {
 }
 
 
-export const loginSMS = (phone: string) => 
-async (dispatch: Dispatch<IAuthType | IAlertType>) => {
-  const check = validPhone(phone)
-  if(!check) 
-    return dispatch({ 
-      type: ALERT, 
-      payload: { errors: 'Phone number format is incorrect.' }
-    });
-
+export const replyComment = (
+  data: IComment, token: string
+) => async(dispatch: Dispatch<IAlertType | IReplyCommentType>) => {
   try {
-    dispatch({ type: ALERT, payload: { loading: true } })
+    const res: any = await postAPI('reply_comment', data, token)
 
-    const res: any = await postAPI('login_sms', { phone })
-    
-    if(!res.data.valid)
-      verifySMS(phone, dispatch)
+    dispatch({
+      type: REPLY_COMMENT,
+      payload: { 
+        ...res.data, 
+        user: data.user,
+        reply_user: data.reply_user
+      }
+    })
     
   } catch (err: any) {
     dispatch({ type: ALERT, payload: { errors: err.response.data.msg } })
   }
 }
 
-export const verifySMS = async (
-  phone: string, dispatch: Dispatch<IAuthType | IAlertType>
-) => {
-    const code = prompt('Enter your code')
-    if(!code) return;
 
-    try {
-      dispatch({ type: ALERT, payload: { loading: true } })
-
-      const res: any = await postAPI('sms_verify', { phone, code })
-      
-      dispatch({ type: AUTH,payload: res.data })
-
-      dispatch({ type: ALERT, payload: { success: res.data.msg } })
-      localStorage.setItem('logged', 'devat-channel')
-    } catch (err: any) {
-      dispatch({ type: ALERT, payload: { errors: err.response.data.msg } })
-      setTimeout(() => {
-        verifySMS(phone, dispatch)
-      }, 100);
-    }
-    
+export const updateComment = (
+  data: IComment, token: string
+) => async(dispatch: Dispatch<IAlertType | IUpdateType>) => {
+  try {
+    dispatch({ 
+      type: data.comment_root ? UPDATE_REPLY : UPDATE_COMMENT, 
+      payload: data 
+    })
+    // const res = await postAPI('comment', data, token)
+  } catch (err: any) {
+    dispatch({ type: ALERT, payload: { errors: err.response.data.msg } })
+  }
 }
