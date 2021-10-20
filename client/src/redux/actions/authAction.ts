@@ -1,4 +1,3 @@
-
 import { Dispatch } from 'redux'
 import { AUTH, IAuthType } from '../types/authType'
 import { ALERT, IAlertType } from '../types/alertType'
@@ -18,7 +17,7 @@ async (dispatch: Dispatch<IAuthType | IAlertType>) => {
     dispatch({ type: AUTH,payload: res.data })
 
     dispatch({ type: ALERT, payload: { success: res.data.msg } })
-    localStorage.setItem('logged', 'myblog')
+    localStorage.setItem('logged', 'devat-channel')
     
   } catch (err: any) {
     dispatch({ type: ALERT, payload: { errors: err.response.data.msg } })
@@ -68,8 +67,8 @@ export const logout = () =>
 async (dispatch: Dispatch<IAuthType | IAlertType>) => {
   try {
     localStorage.removeItem('logged')
+    dispatch({ type: AUTH, payload: { } })
     await getAPI('logout')
-    window.location.href = "/"
   } catch (err: any) {
     dispatch({ type: ALERT, payload: { errors: err.response.data.msg } })
   }
