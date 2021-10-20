@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useHistory} from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import LoginPass from '../components/auth/LoginPass'
@@ -15,9 +15,12 @@ const Login = () => {
   const { auth } = useSelector((state: RootStore) => state)
 
   useEffect(() => {
-    if(auth.access_token) history.push('/')
-  }, [auth.access_token, history])
-  
+    if(auth.access_token) {
+      let url = history.location.search.replace('?', '/')
+      return history.push(url)
+    }
+  },[auth.access_token, history])
+
   return (
     <div className="auth_page">
       <div className="auth_box">
@@ -40,8 +43,8 @@ const Login = () => {
         </small>
 
         <p>
-          {`You don't have an account?`}
-          <Link to={`/register`} style={{color: 'crimson'}}>
+          {`You don't have an account? `}
+          <Link to={`/register${history.location.search}`} style={{color: 'crimson'}}>
             Register Now
           </Link>
         </p>
