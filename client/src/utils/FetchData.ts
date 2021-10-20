@@ -9,6 +9,7 @@ export const postAPI = async (url: string, post: object, token?:any) => {
   return res;
 }
 
+
 export const getAPI = async (url: string, token?:any) => {
   const res = await axios.get(`/api/${url}`, {
     headers: { Authorization: token }
@@ -19,6 +20,14 @@ export const getAPI = async (url: string, token?:any) => {
 
 export const patchAPI = async (url: string, post: object, token?:any) => {
   const res = await axios.patch(`/api/${url}`, post, {
+    headers: { Authorization: token }
+  })
+
+  return res;
+}
+
+export const deleteAPI = async (url: string, token?:any) => {
+  const res = await axios.delete(`/api/${url}`, {
     headers: { Authorization: token }
   })
 
