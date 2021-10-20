@@ -277,3 +277,7 @@ https://cloudinary.com/
 TWILIO_SERVICE_ID = verify --> service (https://console.twilio.com/us1/service/verify/VAec3fe0642fedd54f8cc14c868273944a/verify-service-settings?frameUrl=%2Fconsole%2Fverify%2Fservices%2FVAec3fe0642fedd54f8cc14c868273944a%2Fsettings%3Fx-target-region%3Dus1)
 
 https://www.youtube.com/watch?v=GvhiFQDUJxg&list=PLs4co9a6NhMw7xB4xPSkSQRM8uQVAZak6&index=17 14:00
+
+### solution for npm install error (npm ERR! code ERESOLVE)
+
+npm install react-quill --save --legacy-peer-deps

@@ -21,17 +21,18 @@ code {
   transform: translateY(-3px);
   border-radius: 50%;
 }
-/* ------------ Auth Page ------------ */
+
+/* ---------- Auth Page------------ */
 @import url('./auth.css');
 
-/* ------------ Loading Page ------------ */
+/* ---------- Loading Page------------ */
 @import url('./loading.css');
 
-/* ------------ Alert Page ------------ */
+/* ---------- Alert Page------------ */
 @import url('./alert.css');
 
-/* ------------ Profile Page ------------ */
+/* ---------- Profile Page------------ */
 @import url('./profile.css');
 
-/* ------------ Category Page ------------ */
+/* ---------- Category Page------------ */
 @import url('./category.css');
