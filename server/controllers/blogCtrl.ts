@@ -228,6 +228,7 @@ const blogCtrl = {
   },
   getBlog: async (req: Request, res: Response) => {
     try {
+
       const blog = await Blogs.findOne({_id: req.params.id})
       .populate("user", "-password")
 
