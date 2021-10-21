@@ -11,7 +11,7 @@ export const postAPI = async (url: string, post: object, token?:any) => {
 
 
 export const getAPI = async (url: string, token?:any) => {
-  const res = await axios.get(`/api/${url}`, {
+  const res: any = await axios.get(`/api/${url}`, {
     headers: { Authorization: token }
   })
 

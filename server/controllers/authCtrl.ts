@@ -4,12 +4,12 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { generateActiveToken, generateAccessToken, generateRefreshToken } from '../config/generateToken'
 import sendMail from '../config/sendMail'
-import { validateEmail, validPhone } from '../middleware/vaild'
+import { validateEmail, validPhone } from '../middleware/valid'
 import { sendSms, smsOTP, smsVerify } from '../config/sendSMS'
 import { IDecodedToken, IUser, IGgPayload, IUserParams, IReqAuth } from '../config/interface'
 
 import { OAuth2Client } from 'google-auth-library'
-import fetch from 'node-fetch'
+import fetch from 'cross-fetch'
 
 
 const client = new OAuth2Client(`${process.env.MAIL_CLIENT_ID}`)
