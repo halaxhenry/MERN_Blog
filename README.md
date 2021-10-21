@@ -281,3 +281,11 @@ https://www.youtube.com/watch?v=GvhiFQDUJxg&list=PLs4co9a6NhMw7xB4xPSkSQRM8uQVAZ
 ### solution for npm install error (npm ERR! code ERESOLVE)
 
 npm install react-quill --save --legacy-peer-deps
+
+### socket.io
+
+realtime comment --> npm i socket.io && npm i socket.io-client
+
+https://socket.io/
+
+https://socket.io/docs/v4/client-api/

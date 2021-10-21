@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -12,6 +13,10 @@ import { refreshToken } from './redux/actions/authAction'
 import { getCategories } from './redux/actions/categoryAction'
 import { getHomeBlogs } from './redux/actions/blogAction'
 
+import io from 'socket.io-client'
+
+import SocketClient from './SocketClient'
+
 
 const App = () => {
   const dispatch = useDispatch()
@@ -22,8 +27,15 @@ const App = () => {
     dispatch(getHomeBlogs())
   },[dispatch])
 
+  useEffect(() => {
+    const socket = io()
+    dispatch({ type: 'SOCKET', payload: socket })
+    return () => { socket.close() }
+  },[dispatch])
+
   return (
     <div className="container">
+      <SocketClient />
       <Router>
         <Alert />
         <Header />
