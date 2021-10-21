@@ -25,6 +25,7 @@ export const validRegister = (userRegister: IUserRegister) => {
   }
 }
 
+
 export const checkPassword = (password: string, cf_password: string) => {
   if(password.length < 6){
     return ("Password must be at least 6 chars.")
@@ -42,6 +43,7 @@ export function validateEmail(email: string) {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 }
+
 
 // Valid Blog
 export const validCreateBlog = ({
@@ -77,5 +79,24 @@ export const validCreateBlog = ({
     errMsg: err,
     errLength: err.length
   }
+
+}
+
+// Shallow equality
+export const shallowEqual = (object1: any, object2: any) => {
+  const keys1 = Object.keys(object1)
+  const keys2 = Object.keys(object2)
+
+  if(keys1.length !== keys2.length) {
+    return false;
+  }
+
+  for(let key of keys1) {
+    if(object1[key] !== object2[key]){
+      return false;
+    }
+  }
+  
+  return true;
 
 }
